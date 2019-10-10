@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">Chat</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>{{idMessageEvent}}</h1>
+            <ul>
+                <li *ngFor='let msg of messages'>{{msg.body}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
