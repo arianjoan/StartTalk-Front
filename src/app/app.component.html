@@ -1,4 +1,4 @@
-<div class="container-fluid" id="header">
+<!-- <div class="container-fluid" id="header">
     <div class="row bg-light">
         <header class="col-sm-12">
             <h1 class="text-center">StartTalk {{idMessageEvent}}</h1>
@@ -14,4 +14,34 @@
         </div>
     </div>
 </div>
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<mat-slider min="1" max="100" step="1" value="1"></mat-slider> -->
+<mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">StartTalk</h1>
+</mat-toolbar>
+
+<!-- <mat-drawer-container class="example-container">
+
+    <mat-drawer mode="side" opened class="bg-success">
+        <app-channel></app-channel>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-chat></app-chat>
+    </mat-drawer-content>
+
+</mat-drawer-container> -->
+
+
+<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+        fixedTopGap="56">
+        <app-channel></app-channel>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-chat></app-chat>
+    </mat-sidenav-content>
+</mat-sidenav-container>

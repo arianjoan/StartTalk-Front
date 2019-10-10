@@ -8,7 +8,12 @@ import { ChatComponent } from './components/chat/chat.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSliderModule } from '@angular/material/slider';
+/* import { MatSliderModule } from '@angular/material/slider';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon'; */
+
+import {DemoMaterialModule} from '../material-module';
 
 
 @NgModule({
@@ -22,7 +27,7 @@ import { MatSliderModule } from '@angular/material/slider';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    DemoMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
