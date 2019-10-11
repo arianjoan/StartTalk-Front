@@ -3,6 +3,7 @@ import { Message } from 'src/app/models/message';
 import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat',
@@ -15,7 +16,7 @@ export class ChatComponent implements OnInit {
   currentChannel : String;
   messages;
 
-  constructor(private serviceChannel : ChannelService) { }
+  constructor(private serviceChannel : ChannelService, private http : HttpClient) { }
 
   ngOnInit() {
     this.currentChannel$ = this.serviceChannel.getCurrentChannel$();
@@ -28,16 +29,11 @@ export class ChatComponent implements OnInit {
 
   getMessages(id){
     return new Promise((resolve,eject) => {
-      var request = new XMLHttpRequest();
-      request.open('GET',environment.backend + 'channels/'+id+'/messages');
-      request.responseType = 'json';
-      request.onload = () => {
-        resolve( request.response);
-      }
-      request.onerror = () => {
-        eject(Error('Aqui hubo un error'));
-      }
-      request.send();
+      
+      this.http.get(environment.backend + 'channels/'+id+'/messages').toPromise().then((messagesPromise) => {
+        resolve(messagesPromise);
+      });
+      
     })
   }
 
