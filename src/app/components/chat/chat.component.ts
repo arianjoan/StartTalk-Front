@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
 import { HttpClient } from '@angular/common/http';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -12,55 +13,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ChatComponent implements OnInit {
 
-  currentChannel$ : Observable<String>;
   currentChannel : String;
   messages;
 
-  constructor(private serviceChannel : ChannelService, private http : HttpClient) { }
+  constructor(private serviceChannel : ChannelService, private chatService : ChatService) { }
 
   ngOnInit() {
-    this.currentChannel$ = this.serviceChannel.getCurrentChannel$();
-    this.currentChannel$.subscribe(currentChannel => {
-      this.currentChannel = currentChannel;
-      this.loadMessages();
+    this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
+    
+    this.chatService.currentChannel$.subscribe(currentChannel => {
+      this.chatService.currentChannel = currentChannel;
+      this.messages = this.chatService.loadMessages();
     });
     
   }
-
-  getMessages(id){
-    return new Promise((resolve,eject) => {
-      
-      this.http.get(environment.backend + 'channels/'+id+'/messages').toPromise().then((messagesPromise) => {
-        resolve(messagesPromise);
-      });
-      
-    })
-  }
-
-  async loadMessages(){
-    var id = this.currentChannel;
-    await console.log(id);
-    var messages;
-    messages = await this.getMessages(id);
-    messages = this.mapMessages(messages);
-    this.messages = messages;
-    console.log(messages);
-    }
-  
-    mapMessages (messages) : Message[]{
-  
-      var messagesReturn : Message[] = [];
-  
-     messages.forEach(msg => {
-  
-        let message : Message = new Message();
-        message.body = msg.body;
-        message.id = msg.sid;
-        messagesReturn.push(message);
-  
-      });
-  
-      return messagesReturn;
-    }
 
 }
