@@ -12,4 +12,16 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <label for="addMessage">Mensaje: </label>
+            <input type="text" name="addMessage" [formControl]='messageToSend'>
+            <button class="btn btn-success" (click)='sendMessage()'>Enviar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-danger" (click)='viewMessages()'>A ver</button>
+        </div>
+    </div>
 </div>

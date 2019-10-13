@@ -14,6 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon'; */
 
 import {DemoMaterialModule} from '../material-module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {DemoMaterialModule} from '../material-module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     DemoMaterialModule
   ],
   providers: [],

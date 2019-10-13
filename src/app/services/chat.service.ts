@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { Message } from '../models/message';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -15,6 +15,17 @@ export class ChatService {
   messages: any;
 
   constructor(private http: HttpClient) { }
+
+
+  sendMessage(body : String){
+    console.log("hola");
+    console.log(body);
+    new Promise((resolve,reject) => {
+      this.http.post(environment.backend + 'messages/'+this.currentChannel,body).toPromise()
+      .then(() => {console.log("Todo ok")})
+      .catch(() => {console.log("Algo mal")});
+    })
+  }
 
   getMessages(id) {
     return new Promise((resolve, eject) => {
@@ -50,4 +61,5 @@ export class ChatService {
 
     return messagesReturn;
   }
+
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
 import { HttpClient } from '@angular/common/http';
 import { ChatService } from 'src/app/services/chat.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -14,18 +15,39 @@ import { ChatService } from 'src/app/services/chat.service';
 export class ChatComponent implements OnInit {
 
   currentChannel : String;
-  messages;
+  messages : Promise<Message[]>;
+  messageToSend;
+
 
   constructor(private serviceChannel : ChannelService, private chatService : ChatService) { }
 
   ngOnInit() {
+    this.messageToSend = new FormControl('');
     this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
     
     this.chatService.currentChannel$.subscribe(currentChannel => {
       this.chatService.currentChannel = currentChannel;
       this.messages = this.chatService.loadMessages();
     });
+
+    this.pruebaMessages();
     
+  }
+
+  sendMessage(){
+    console.log(this.messageToSend);
+    this.chatService.sendMessage(this.messageToSend.value);
+    this.messages = this.chatService.loadMessages();
+  }
+
+  viewMessages(){
+    console.log(this.messages);
+  }
+
+  pruebaMessages(){
+    setInterval(() => {
+      this.messages = this.chatService.loadMessages();
+    },5000);
   }
 
 }
