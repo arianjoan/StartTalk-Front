@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from 'src/app/models/message';
-import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
 import { HttpClient } from '@angular/common/http';
@@ -63,9 +62,12 @@ export class ChatComponent implements OnInit {
    })
   } */
 
-  async getToken(){
-    var token = await this.serviceChannel.getToken();
-    Client.create(token).then((client) => console.log(client)).catch((error) => console.log(error));
+   getToken(){
+    this.serviceChannel.getToken().then((token) => {
+      Client.create(token).then((client) => {
+        console.log("hola");
+      })
+    })
   }
 
 }
