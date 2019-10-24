@@ -49,4 +49,8 @@ export class ChannelService {
   public getCurrentChannel$() : Observable<String>{
     return this.currentChannel$.asObservable();
   }
+
+  public getToken(){
+    return this.http.get(environment.backend + 'token',{responseType: 'text'}).toPromise();
+  }
 }

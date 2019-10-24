@@ -6,6 +6,7 @@ import { ChannelService } from 'src/app/services/channel.service';
 import { HttpClient } from '@angular/common/http';
 import { ChatService } from 'src/app/services/chat.service';
 import { FormControl } from '@angular/forms';
+import { Client } from 'twilio-chat'
 
 @Component({
   selector: 'app-chat',
@@ -14,40 +15,57 @@ import { FormControl } from '@angular/forms';
 })
 export class ChatComponent implements OnInit {
 
-  currentChannel : String;
-  messages : Promise<Message[]>;
+  currentChannel: String;
+  messages: Promise<Message[]>;
   messageToSend;
+  tokenParse : string;
 
 
-  constructor(private serviceChannel : ChannelService, private chatService : ChatService) { }
+
+  constructor(private serviceChannel: ChannelService, private chatService: ChatService) { }
 
   ngOnInit() {
     this.messageToSend = new FormControl('');
     this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
-    
+
     this.chatService.currentChannel$.subscribe(currentChannel => {
       this.chatService.currentChannel = currentChannel;
       this.messages = this.chatService.loadMessages();
     });
 
-    this.pruebaMessages();
-    
+    //this.pruebaMessages();
+
   }
 
-  sendMessage(){
+  sendMessage() {
     console.log(this.messageToSend);
     this.chatService.sendMessage(this.messageToSend.value);
     this.messages = this.chatService.loadMessages();
   }
 
-  viewMessages(){
+  viewMessages() {
     console.log(this.messages);
   }
 
-  pruebaMessages(){
+  pruebaMessages() {
     setInterval(() => {
       this.messages = this.chatService.loadMessages();
-    },5000);
+    }, 5000);
+  }
+
+ /*  getToken() {
+   this.serviceChannel.getToken().then((token) => {
+     this.tokenParse = token;
+     console.log(this.tokenParse);
+     Client.create(this.tokenParse).then((client) => {
+       console.log("hola");
+     })
+   })
+  } */
+
+  async getToken(){
+    var token = await this.serviceChannel.getToken();
+    Client.create(token).then((client) => console.log(client)).catch((error) => console.log(error));
   }
 
 }
