@@ -17,6 +17,7 @@ import {DemoMaterialModule} from '../material-module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
