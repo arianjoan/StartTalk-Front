@@ -64,43 +64,12 @@ export class ChatComponent implements OnInit {
     }, 5000);
   }
 
- /*  getToken() {
-   this.serviceChannel.getToken().then((token) => {
-     this.tokenParse = token; 
-     console.log(this.tokenParse);
-     Client.create(this.tokenParse).then((client) => {
-       console.log("hola");
-     })
-   })
-  } */
+ 
 
    getToken(){
     this.serviceChannel.getToken().then((token) => {
       Client.create(token).then((client) => {
         console.log("hola");
-      })
-    })
-  }
-
-  // getToken(){
-  //   this.serviceChannel.getToken().then((token) => {
-  //     Client.create(token).then((client) => {
-        
-  //     })
-  //   })
-  // }
-
-  getToken(){
-    this.serviceChannel.getToken().then((token) => {
-      Client.create(token).then((client) => {
-        client.createChannel({
-          uniqueName: 'Lucero',
-          friendlyName: 'Lucero',
-        })
-        .then(function(channel) {
-          console.log('Created general channel:');
-          console.log(channel);
-        });
       })
     })
   }
