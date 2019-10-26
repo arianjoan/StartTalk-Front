@@ -66,12 +66,12 @@ export class ChatComponent implements OnInit {
 
  
 
-   getToken(){
+   /* getToken(){
     this.serviceChannel.getToken().then((token) => {
       Client.create(token).then((client) => {
         console.log("hola");
       })
     })
-  }
+  } */
 
 }
