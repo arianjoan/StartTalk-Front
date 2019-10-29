@@ -9,10 +9,10 @@ import { ChannelComponent } from './components/channel/channel.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent /* implements OnDestroy */ {
 
 
-  mobileQuery: MediaQueryList;
+  /* mobileQuery: MediaQueryList;
 
   @ViewChild(ChannelComponent,{static: true}) hijo : ChannelComponent;
 
@@ -37,6 +37,6 @@ export class AppComponent implements OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  shouldRun = true;
+  shouldRun = true; */
 }
 
