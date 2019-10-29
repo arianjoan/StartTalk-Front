@@ -12,14 +12,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class ChannelComponent implements OnInit {
 
   channels : Promise<Channel[]>;
-  mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
  
-  constructor(private serviceChannel : ChannelService,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-   }
+  constructor(private serviceChannel : ChannelService) { }
 
   ngOnInit(){
     this.channels =  this.serviceChannel.getChannels();
