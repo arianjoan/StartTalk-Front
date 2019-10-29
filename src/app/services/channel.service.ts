@@ -51,6 +51,6 @@ export class ChannelService {
   }
 
   public getToken(){
-    return this.http.get(environment.backend + 'token',{responseType: 'text'}).toPromise();
+    return this.http.get(environment.backend + 'token',{responseType : 'text'}).toPromise();
   }
 }

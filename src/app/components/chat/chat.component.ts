@@ -5,7 +5,7 @@ import { ChannelService } from 'src/app/services/channel.service';
 import { HttpClient } from '@angular/common/http';
 import { ChatService } from 'src/app/services/chat.service';
 import { FormControl } from '@angular/forms';
-import { Client } from 'twilio-chat'
+import {Client} from 'twilio-chat';
 
 @Component({
   selector: 'app-chat',
@@ -32,8 +32,20 @@ export class ChatComponent implements OnInit {
       this.messages = this.chatService.loadMessages();
     });
 
-    //this.pruebaMessages();
 
+
+    
+    this.serviceChannel.getToken().then((token) => {
+      Client.create(token).then((client) => {
+        client.on('channelAdded', function(channel) {
+          console.log('Channel added: ' + channel.friendlyName);
+        });
+        
+      })
+    })
+
+    //this.pruebaMessages();
+    
   }
 
   sendMessage() {
@@ -52,22 +64,14 @@ export class ChatComponent implements OnInit {
     }, 5000);
   }
 
- /*  getToken() {
-   this.serviceChannel.getToken().then((token) => {
-     this.tokenParse = token;
-     console.log(this.tokenParse);
-     Client.create(this.tokenParse).then((client) => {
-       console.log("hola");
-     })
-   })
-  } */
+ 
 
-   getToken(){
+   /* getToken(){
     this.serviceChannel.getToken().then((token) => {
       Client.create(token).then((client) => {
         console.log("hola");
       })
     })
-  }
+  } */
 
 }
