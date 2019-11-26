@@ -44,6 +44,7 @@ export class ChannelService {
   public setCurrentChannel(currentChannel : String){
     this.currentChannel = currentChannel;
     this.currentChannel$.next(this.currentChannel);
+    console.log(this.currentChannel);
   }
 
   public getCurrentChannel$() : Observable<String>{
