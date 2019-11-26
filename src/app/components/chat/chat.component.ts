@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { ChatService } from 'src/app/services/chat.service';
 import { FormControl } from '@angular/forms';
 import {Client} from 'twilio-chat';
+import * as SockJs from 'sockjs-client';
+import * as Stomp from 'stompjs';
 
 @Component({
   selector: 'app-chat',
@@ -14,64 +16,44 @@ import {Client} from 'twilio-chat';
 })
 export class ChatComponent implements OnInit {
 
-  currentChannel: String;
   messages: Promise<Message[]>;
   messageToSend;
   tokenParse : string;
+  stompClient: Stomp.Client;
 
 
 
   constructor(private serviceChannel: ChannelService, private chatService: ChatService) { }
 
+  initializeWebSocketConnection(){
+    let ws = new SockJs('http://localhost:8080/socket');
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({},function (frame) {
+      that.stompClient.subscribe("/chat/" + that.chatService.currentChannel, (message) => {
+        if (message.body){
+          console.log(message.body);
+        }
+      })
+    })
+  }
+
+
+  sendMessage(){
+    this.stompClient.send("/app/messages/" + this.chatService.currentChannel, {}, this.messageToSend.value);
+  }
+
   ngOnInit() {
+
     this.messageToSend = new FormControl('');
     this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
 
     this.chatService.currentChannel$.subscribe(currentChannel => {
       this.chatService.currentChannel = currentChannel;
       this.messages = this.chatService.loadMessages();
+      this.initializeWebSocketConnection();
     });
 
-
-
-    
-    this.serviceChannel.getToken().then((token) => {
-      Client.create(token).then((client) => {
-        client.on('channelAdded', function(channel) {
-          console.log('Channel added: ' + channel.friendlyName);
-        });
-        
-      })
-    })
-
-    //this.pruebaMessages();
-    
   }
-
-  sendMessage() {
-    console.log(this.messageToSend);
-    this.chatService.sendMessage(this.messageToSend.value);
-    this.messages = this.chatService.loadMessages();
-  }
-
-  viewMessages() {
-    console.log(this.messages);
-  }
-
-  pruebaMessages() {
-    setInterval(() => {
-      this.messages = this.chatService.loadMessages();
-    }, 5000);
-  }
-
- 
-
-   /* getToken(){
-    this.serviceChannel.getToken().then((token) => {
-      Client.create(token).then((client) => {
-        console.log("hola");
-      })
-    })
-  } */
 
 }

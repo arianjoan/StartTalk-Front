@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Channel } from 'src/app/models/channel';
 import { ChannelService } from 'src/app/services/channel.service';
-import { MediaMatcher } from '@angular/cdk/layout';
+import { Client } from 'twilio-chat';
+
 
 
 @Component({
@@ -13,10 +14,15 @@ export class ChannelComponent implements OnInit {
 
   channels : Promise<Channel[]>;
  
-  constructor(private serviceChannel : ChannelService) { }
+  constructor(private serviceChannel : ChannelService) { 
+
+  }
+
+  
 
   ngOnInit(){
     this.channels =  this.serviceChannel.getChannels();
+
   }
 
   setCurrentChannel(id){
