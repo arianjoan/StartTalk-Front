@@ -7,9 +7,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>{{idMessageEvent}}</h1>
-            <ul>
-                <li *ngFor='let msg of (messages | async)'>{{msg.from}}: {{msg.body}}</li>
-            </ul>
+                <p *ngFor='let msg of messages'>{{msg.from}}: {{msg.body}} <br></p>
         </div>
     </div>
     <div class="row">

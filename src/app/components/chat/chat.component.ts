@@ -16,10 +16,12 @@ import * as Stomp from 'stompjs';
 })
 export class ChatComponent implements OnInit {
 
-  messages: Promise<Message[]>;
+  /* messages: Promise<Message[]>; */
+  messages;
   messageToSend;
   tokenParse : string;
   stompClient: Stomp.Client;
+  messages$ : Observable<Message[]>;
 
 
 
@@ -34,6 +36,7 @@ export class ChatComponent implements OnInit {
         if (message.body){
           console.log(message.body);
         }
+        
       })
     })
   }
@@ -47,10 +50,11 @@ export class ChatComponent implements OnInit {
 
     this.messageToSend = new FormControl('');
     this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
-
+    this.messages$ = this.chatService.getMessages$();
+    this.messages$.subscribe((messages) => this.messages = messages);
     this.chatService.currentChannel$.subscribe(currentChannel => {
       this.chatService.currentChannel = currentChannel;
-      this.messages = this.chatService.loadMessages();
+      this.chatService.loadMessages();
       this.initializeWebSocketConnection();
     });
 

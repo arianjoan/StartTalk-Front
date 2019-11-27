@@ -13,6 +13,7 @@ export class ChatService {
   currentChannel$: Observable<String>;
   currentChannel: String;
   messages: any;
+  private messages$ = new Subject<Message[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -28,21 +29,33 @@ export class ChatService {
   }
 
   getMessages(id) {
-    return new Promise((resolve, eject) => {
+   /*  return new Promise((resolve, eject) => {
 
       this.http.get(environment.backend + 'channels/' + id + '/messages').toPromise().then((messagesPromise) => {
         resolve(messagesPromise);
       });
 
-    })
+    }) */
+    return this.http.get(environment.backend + 'channels/' + id + '/messages');
   }
 
-  public async loadMessages() {
-    var id = this.currentChannel;
+  public /* async */ loadMessages(){
+    /* var id = this.currentChannel;
     var messages;
     messages = await this.getMessages(id);
     messages = this.mapMessages(messages);
-    return messages;
+    return messages; */
+
+    var id = this.currentChannel;
+    this.getMessages(id).subscribe((messages) => {
+      let messagesMapped : Message[];
+      messagesMapped = this.mapMessages(messages);
+      this.messages$.next(messagesMapped);
+    });
+  }
+
+  public getMessages$(){
+    return this.messages$.asObservable();
   }
 
   private mapMessages(messages): Message[] {
