@@ -16,7 +16,6 @@ import * as Stomp from 'stompjs';
 })
 export class ChatComponent implements OnInit {
 
-  /* messages: Promise<Message[]>; */
   messages;
   messageToSend;
   tokenParse : string;
