@@ -13,6 +13,7 @@ import { Client } from 'twilio-chat';
 export class ChannelComponent implements OnInit {
 
   channels : Promise<Channel[]>;
+  mouseOver = false;
  
   constructor(private serviceChannel : ChannelService) { 
 
