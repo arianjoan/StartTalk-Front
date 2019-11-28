@@ -2,10 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Message } from 'src/app/models/message';
 import { Observable } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
-import { HttpClient } from '@angular/common/http';
 import { ChatService } from 'src/app/services/chat.service';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
-import {Client} from 'twilio-chat';
 import * as SockJs from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { environment } from 'src/environments/environment.prod';
@@ -46,7 +44,7 @@ export class ChatComponent implements OnInit {
       this.chatService.currentChannel = currentChannel;
       this.chatService.loadMessages();
       this.initializeWebSocketConnection();
-      
+
     });
 
   }
