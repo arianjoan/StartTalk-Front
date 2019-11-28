@@ -12,7 +12,7 @@ export class ChatService {
 
   currentChannel$: Observable<String>;
   currentChannel: String;
-  messages: any;
+  messages: Message[];
   private messages$ = new Subject<Message[]>();
 
   constructor(private http: HttpClient) { }
@@ -50,6 +50,7 @@ export class ChatService {
     this.getMessages(id).subscribe((messages) => {
       let messagesMapped : Message[];
       messagesMapped = this.mapMessages(messages);
+      this.messages = messagesMapped;
       this.messages$.next(messagesMapped);
     });
   }
@@ -73,6 +74,12 @@ export class ChatService {
     });
 
     return messagesReturn;
+  }
+
+  onMessageReceived(message : Message){
+    console.log('mensajeee' + message);
+    this.messages.push(message);
+    this.messages$.next(this.messages);
   }
 
 }

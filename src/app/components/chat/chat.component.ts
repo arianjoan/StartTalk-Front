@@ -33,10 +33,15 @@ export class ChatComponent implements OnInit {
     let that = this;
     this.stompClient.connect({},function (frame) {
       that.stompClient.subscribe("/chat/" + that.chatService.currentChannel, (message) => {
+        let messageReceived : Message = new Message();
         if (message.body){
-          console.log(message.body);
+          console.log('mensaje' + message.body);
         }
+        messageReceived.body = JSON.parse(message.body)['body'];
+        messageReceived.from = JSON.parse(message.body)['from'];
+        messageReceived.id = JSON.parse(message.body)['id'];
         
+        that.chatService.onMessageReceived(messageReceived);
       })
     })
   }
