@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import {Client} from 'twilio-chat';
 import * as SockJs from 'sockjs-client';
 import * as Stomp from 'stompjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-chat',
@@ -27,22 +28,30 @@ export class ChatComponent implements OnInit {
   constructor(private serviceChannel: ChannelService, private chatService: ChatService) { }
 
   initializeWebSocketConnection(){
-    let ws = new SockJs('http://localhost:8080/socket');
-    this.stompClient = Stomp.over(ws);
+    let ws = new SockJs(environment.backend + 'socket');
     let that = this;
+
+    this.stompClient = Stomp.over(ws);
+    
     this.stompClient.connect({},function (frame) {
+
       that.stompClient.subscribe("/chat/" + that.chatService.currentChannel, (message) => {
-        let messageReceived : Message = new Message();
-        if (message.body){
-          console.log('mensaje' + message.body);
-        }
-        messageReceived.body = JSON.parse(message.body)['body'];
-        messageReceived.from = JSON.parse(message.body)['from'];
-        messageReceived.id = JSON.parse(message.body)['id'];
         
-        that.chatService.onMessageReceived(messageReceived);
+        if (message.body){
+          let messageReceived : Message = new Message();
+          let messageParse = JSON.parse(message.body);
+
+          messageReceived.body = messageParse['body'];
+          messageReceived.from = messageParse['from'];
+          messageReceived.id = messageParse['sid'];
+
+          that.chatService.onMessageReceived(messageReceived);
+        }
+
       })
+
     })
+
   }
 
 
