@@ -1,16 +1,19 @@
 <div class="container-fluid height">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="text-center">Chat</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>{{idMessageEvent}}</h1>
-                <p *ngFor='let msg of messages'>{{msg.from}}: {{msg.body}} <br></p>
-        </div>
-    </div>
     <form [formGroup]='formMessageGroup'>
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="text-center">Chat</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p *ngFor='let msg of messages'
+                    [className]="msg.from == formMessageGroup.get('from').value ? 'text-right' : 'text-left'">
+                    {{msg.from}}: {{msg.body}} <br>
+                </p>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-sm-12">
                 <label for="name">Nombre: </label>
@@ -25,11 +28,5 @@
             </div>
         </div>
     </form>
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <button class="btn btn-danger" (click)='viewMessages()'>A ver</button>
-            <button class="btn btn-success" (click)='viewChannel()'>A ver</button>
-        </div>
-    </div>
+
 </div>
