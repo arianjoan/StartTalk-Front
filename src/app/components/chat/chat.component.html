@@ -10,13 +10,22 @@
                 <p *ngFor='let msg of messages'>{{msg.from}}: {{msg.body}} <br></p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <label for="addMessage">Mensaje: </label>
-            <input type="text" name="addMessage" [formControl]='messageToSend'>
-            <button class="btn btn-success" (click)='sendMessage()'>Enviar</button>
+    <form [formGroup]='formMessageGroup'>
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="name">Nombre: </label>
+                <input type="text" name="name" formControlName='from'>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="addMessage">Mensaje: </label>
+                <input type="text" name="addMessage" formControlName='body'>
+                <button class="btn btn-success" (click)='sendMessage()'>Enviar</button>
+            </div>
+        </div>
+    </form>
+    
     <div class="row">
         <div class="col-sm-12">
             <button class="btn btn-danger" (click)='viewMessages()'>A ver</button>

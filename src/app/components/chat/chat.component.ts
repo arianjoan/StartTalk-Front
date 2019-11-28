@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ChannelService } from 'src/app/services/channel.service';
 import { HttpClient } from '@angular/common/http';
 import { ChatService } from 'src/app/services/chat.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import {Client} from 'twilio-chat';
 import * as SockJs from 'sockjs-client';
 import * as Stomp from 'stompjs';
@@ -17,17 +17,42 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class ChatComponent implements OnInit {
 
-  messages;
-  messageToSend;
-  tokenParse : string;
-  stompClient: Stomp.Client;
-  messages$ : Observable<Message[]>;
+  private messages : Message[];
+  private messageToSend : Message = new Message();
+  private messages$ : Observable<Message[]>;
+  private formMessageGroup : FormGroup;
+  private stompClient: Stomp.Client;
 
+  constructor(
+    private serviceChannel: ChannelService,
+    private chatService: ChatService,
+    private fb : FormBuilder
+    ) { }
 
+  ngOnInit() {
 
-  constructor(private serviceChannel: ChannelService, private chatService: ChatService) { }
+    this.formMessageGroup = this.fb.group({
+      'from' : [this.messageToSend.from],
+      'body' : [this.messageToSend.body]
+    })
+
+    this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
+
+    this.messages$ = this.chatService.getMessages$();
+    this.messages$.subscribe((messages) => this.messages = messages);
+
+    this.chatService.currentChannel$.subscribe(currentChannel => {
+
+      this.chatService.currentChannel = currentChannel;
+      this.chatService.loadMessages();
+      this.initializeWebSocketConnection();
+      
+    });
+
+  }
 
   initializeWebSocketConnection(){
+
     let ws = new SockJs(environment.backend + 'socket');
     let that = this;
 
@@ -54,23 +79,10 @@ export class ChatComponent implements OnInit {
 
   }
 
-
   sendMessage(){
-    this.stompClient.send("/app/messages/" + this.chatService.currentChannel, {}, this.messageToSend.value);
-  }
-
-  ngOnInit() {
-
-    this.messageToSend = new FormControl('');
-    this.chatService.currentChannel$ = this.serviceChannel.getCurrentChannel$();
-    this.messages$ = this.chatService.getMessages$();
-    this.messages$.subscribe((messages) => this.messages = messages);
-    this.chatService.currentChannel$.subscribe(currentChannel => {
-      this.chatService.currentChannel = currentChannel;
-      this.chatService.loadMessages();
-      this.initializeWebSocketConnection();
-    });
-
+    console.log(this.formMessageGroup.value);
+    this.messageToSend = this.formMessageGroup.value;
+    this.stompClient.send("/app/messages/" + this.chatService.currentChannel, {}, JSON.stringify(this.messageToSend));
   }
 
 }
