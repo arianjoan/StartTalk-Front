@@ -30,5 +30,9 @@ export class ChannelComponent implements OnInit {
   setCurrentChannel(id){
     this.serviceChannel.setCurrentChannel(id);
   }
+
+  getCurrentChannel(){
+    return this.serviceChannel.getCurrentChannel();
+  }
  
 }

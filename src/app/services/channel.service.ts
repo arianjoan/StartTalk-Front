@@ -14,7 +14,7 @@ export class ChannelService {
 
   channels: Channel[] = [];
   private currentChannel$ = new Subject<String>();
-  private currentChannel: String = "CH35e0a2e365ed4875b0ac5712bd9d671f";
+  private currentChannel: String;
 
 
   public getChannels(): Observable<any> {
@@ -49,5 +49,9 @@ export class ChannelService {
 
   public getToken() {
     return this.http.get(environment.backend + 'token', { responseType: 'text' }).toPromise();
+  }
+
+  public getCurrentChannel(){
+    return this.currentChannel;
   }
 }

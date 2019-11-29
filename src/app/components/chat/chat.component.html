@@ -1,5 +1,5 @@
 <div class="container-fluid height">
-    <form [formGroup]='formMessageGroup'>
+    <form [formGroup]='formMessageGroup' *ngIf='this.serviceChannel.getCurrentChannel() != undefined'>
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="text-center">Chat</h1>
@@ -28,5 +28,9 @@
             </div>
         </div>
     </form>
+
+    <div *ngIf='this.serviceChannel.getCurrentChannel() == undefined'>
+        <img class="img-responsive" src="../../../assets/Welcome.jpg">
+    </div>
 
 </div>
