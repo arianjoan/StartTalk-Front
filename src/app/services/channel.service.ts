@@ -16,33 +16,25 @@ export class ChannelService {
   private currentChannel$ = new Subject<String>();
   private currentChannel: String = "CH35e0a2e365ed4875b0ac5712bd9d671f";
 
-  /*  public getChannels(): Promise<Channel[]> {
-     return new Promise((resolve, reject) => {
-       this.http.get(environment.backend + 'channels').toPromise()
-       .then((response) => {
-       return resolve(this.mapChannels(response));
-       });
-     })
-   } */
 
   public getChannels(): Observable<any> {
     return this.http.get(environment.backend + 'channels')
   }
 
-  mapChannels(channels): Channel[] {
+  mapChannels(channelsJson): Channel[] {
 
-    var channelsReturn: Channel[] = [];
+    var channelsArrayDTO: Channel[] = [];
 
-    channels.forEach(ch => {
+    channelsJson.forEach(channel => {
 
-      let channel: Channel = new Channel();
-      channel.name = ch.friendlyName;
-      channel.id = ch.sid;
-      channelsReturn.push(channel);
+      let channelDTO: Channel = new Channel();
+      channelDTO.name = channel.friendlyName;
+      channelDTO.id = channel.sid;
+      channelsArrayDTO.push(channelDTO);
 
     });
 
-    return channelsReturn;
+    return channelsArrayDTO;
   }
 
   public setCurrentChannel(currentChannel: String) {

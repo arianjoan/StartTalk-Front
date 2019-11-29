@@ -1,12 +1,7 @@
-  <aside>
-    <h3>Canales</h3>
-      <!-- <ul class="list-group" >
-        <li class="list-group-item" *ngFor='let ch of (channels | async) '>
-          <button (click)='setCurrentChannel(ch.id)'>{{ch.name}}</button>
-        </li>
-      </ul> -->
-      <p *ngFor='let ch of channels; let i = index;' (click)='setCurrentChannel(ch.id)' (mouseenter)='mouseOver = true' (mouseleave)='mouseOver = false' [className]="mouseOver == true ? 'text-left' : 'text-right'">
-        {{ch.name}}
-      </p>
-      <br>
-  </aside>
+<aside>
+  <h3>Canales</h3>
+  <p *ngFor='let ch of channels; let i = index;' (click)='setCurrentChannel(ch.id)' (mouseenter)='mouseOver[i] = true'
+    (mouseleave)='mouseOver[i] = false' [className]="mouseOver[i] == true ? 'selected' : 'noSelected'">
+    {{ch.name}}
+  </p>
+</aside>
