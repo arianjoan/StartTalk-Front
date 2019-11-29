@@ -5,7 +5,7 @@
           <button (click)='setCurrentChannel(ch.id)'>{{ch.name}}</button>
         </li>
       </ul> -->
-      <p *ngFor='let ch of (channels | async) ' (click)='setCurrentChannel(ch.id)' (mouseenter)='mouseOver = true' (mouseleave)='mouseOver = false' [className]="mouseOver == true ? 'text-left' : 'text-right'">
+      <p *ngFor='let ch of channels; let i = index;' (click)='setCurrentChannel(ch.id)' (mouseenter)='mouseOver = true' (mouseleave)='mouseOver = false' [className]="mouseOver == true ? 'text-left' : 'text-right'">
         {{ch.name}}
       </p>
       <br>

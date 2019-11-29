@@ -10,22 +10,26 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ChannelService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   channels: Channel[] = [];
-  private currentChannel$  = new Subject<String>();
-  private currentChannel  : String = "CH35e0a2e365ed4875b0ac5712bd9d671f";
+  private currentChannel$ = new Subject<String>();
+  private currentChannel: String = "CH35e0a2e365ed4875b0ac5712bd9d671f";
 
-  public getChannels(): Promise<Channel[]> {
-    return new Promise((resolve, reject) => {
-      this.http.get(environment.backend + 'channels').toPromise()
-      .then((response) => {
-      return resolve(this.mapChannels(response));
-      });
-    })
+  /*  public getChannels(): Promise<Channel[]> {
+     return new Promise((resolve, reject) => {
+       this.http.get(environment.backend + 'channels').toPromise()
+       .then((response) => {
+       return resolve(this.mapChannels(response));
+       });
+     })
+   } */
+
+  public getChannels(): Observable<any> {
+    return this.http.get(environment.backend + 'channels')
   }
 
-  private mapChannels(channels): Channel[] {
+  mapChannels(channels): Channel[] {
 
     var channelsReturn: Channel[] = [];
 
@@ -41,17 +45,17 @@ export class ChannelService {
     return channelsReturn;
   }
 
-  public setCurrentChannel(currentChannel : String){
+  public setCurrentChannel(currentChannel: String) {
     this.currentChannel = currentChannel;
     this.currentChannel$.next(this.currentChannel);
     console.log(this.currentChannel);
   }
 
-  public getCurrentChannel$() : Observable<String>{
+  public getCurrentChannel$(): Observable<String> {
     return this.currentChannel$.asObservable();
   }
 
-  public getToken(){
-    return this.http.get(environment.backend + 'token',{responseType : 'text'}).toPromise();
+  public getToken() {
+    return this.http.get(environment.backend + 'token', { responseType: 'text' }).toPromise();
   }
 }

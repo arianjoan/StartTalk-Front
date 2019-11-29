@@ -12,7 +12,7 @@ import { Client } from 'twilio-chat';
 })
 export class ChannelComponent implements OnInit {
 
-  channels : Promise<Channel[]>;
+  channels : Channel[];
   mouseOver = false;
  
   constructor(private serviceChannel : ChannelService) { 
@@ -20,7 +20,9 @@ export class ChannelComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.channels =  this.serviceChannel.getChannels();
+    this.serviceChannel.getChannels().subscribe((channels) => {
+      this.channels = this.serviceChannel.mapChannels(channels);
+    })
 
   }
 
