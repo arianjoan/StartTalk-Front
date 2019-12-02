@@ -1,3 +1,15 @@
 .height{
     height: 85vh;
 }
+.circular{
+    border-radius: 100%;
+}
+
+.background{
+    height: 85vh;
+    width: 60vh;
+}
+
+.greyBackground{
+    background-color: red;
+}

@@ -1,7 +1,7 @@
 <aside>
-  <h3>Canales</h3>
+  <h3 class="text-center channelColor">Canales</h3>
   <p *ngFor='let ch of channels; let i = index;' (click)='setCurrentChannel(ch.id)' (mouseenter)='mouseOver[i] = true'
     (mouseleave)='mouseOver[i] = false' [className]="mouseOver[i] == true || getCurrentChannel() == ch.id ? 'selected' : 'noSelected'">
     {{ch.name}}
-  </p>
+</p>
 </aside>

@@ -1,5 +1,5 @@
 .selected{
-    background-color: blue;
+    background-color: rgb(82, 170, 70);
     padding: 10px;
     margin: 0px;
 }
@@ -8,4 +8,9 @@
     background-color: white;
     padding: 10px;
     margin: 0px;
+}
+
+.channelColor{
+    background-color: rgb(82, 170, 70);
+    margin: 0;
 }
