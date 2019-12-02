@@ -1,15 +1,17 @@
 .height{
     height: 85vh;
 }
-.circular{
-    border-radius: 100%;
-}
 
 .background{
     height: 85vh;
     width: 60vh;
 }
 
-.greyBackground{
-    background-color: red;
+.backgroundGrey{
+    background-image: url(../../../assets/grey.jpg);
+}
+
+.centerChat{
+    padding-right: 35px;
+    padding-left: 35px;
 }

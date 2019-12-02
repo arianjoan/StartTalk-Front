@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Channel } from 'src/app/models/channel';
 import { ChannelService } from 'src/app/services/channel.service';
 import { Client } from 'twilio-chat';
@@ -27,8 +27,21 @@ export class ChannelComponent implements OnInit {
 
   }
 
-  setCurrentChannel(id){
-    this.serviceChannel.setCurrentChannel(id);
+  //Luego se reemplazará por el login
+
+  setCurrentChannel(channel : Channel){
+    if (localStorage.getItem('name')){
+
+      if (localStorage.getItem('name') != 'null'){
+        this.serviceChannel.setCurrentChannel(channel);
+      }else{
+        localStorage.removeItem('name');
+      }
+    }else{
+      localStorage.setItem('name',window.prompt('Ingrese su nombre','system'));
+      this.setCurrentChannel(channel);
+    }
+    
   }
 
   getCurrentChannel(){

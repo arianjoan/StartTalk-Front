@@ -9,17 +9,21 @@
   }
 
   mat-drawer {
-    width: 300px;
+    width: 20vw;
+    margin: 0%;
   }
   
   mat-drawer-content {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 80vw;
+    margin: 0%;
+    padding: 15px;
   }
 
   .toolbarColor{
     background-color: green;
     color: white;
   }
+
+ 
+
+ 

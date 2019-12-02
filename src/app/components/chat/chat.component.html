@@ -1,25 +1,19 @@
-<div class="container-fluid height" >
-    <form [formGroup]='formMessageGroup' *ngIf='this.serviceChannel.getCurrentChannel() != undefined'>
+<div class="height">
+    <form [formGroup]='formMessageGroup' *ngIf='this.serviceChannel.getCurrentChannel() != undefined' class="centerChat backgroundGrey">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="text-center">Chat</h1>
+                <h1 class="text-center">{{this.serviceChannel.getCurrentChannel().name}}</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <p *ngFor='let msg of messages'
-                    [className]="msg.from == formMessageGroup.get('from').value ? 'text-right' : 'text-left'">
+                    [className]="msg.from == getName('name') ? 'text-right' : 'text-left'">
                     {{msg.from}}: {{msg.body}} <br>
                 </p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <label for="name">Nombre: </label>
-                <input type="text" name="name" formControlName='from'>
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-12">
                 <label for="addMessage">Mensaje: </label>

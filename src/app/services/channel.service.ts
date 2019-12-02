@@ -14,7 +14,7 @@ export class ChannelService {
 
   channels: Channel[] = [];
   private currentChannel$ = new Subject<String>();
-  private currentChannel: String;
+  private currentChannel: Channel;
 
 
   public getChannels(): Observable<any> {
@@ -37,10 +37,9 @@ export class ChannelService {
     return channelsArrayDTO;
   }
 
-  public setCurrentChannel(currentChannel: String) {
+  public setCurrentChannel(currentChannel: Channel) {
     this.currentChannel = currentChannel;
-    this.currentChannel$.next(this.currentChannel);
-    console.log(this.currentChannel);
+    this.currentChannel$.next(this.currentChannel.id);
   }
 
   public getCurrentChannel$(): Observable<String> {

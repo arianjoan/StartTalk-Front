@@ -30,7 +30,6 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
 
     this.formMessageGroup = this.fb.group({
-      'from' : [this.messageToSend.from],
       'body' : [this.messageToSend.body]
     })
 
@@ -80,7 +79,12 @@ export class ChatComponent implements OnInit {
   sendMessage(){
     console.log(this.formMessageGroup.value);
     this.messageToSend = this.formMessageGroup.value;
+    this.messageToSend.from = localStorage.getItem('name');
     this.stompClient.send("/app/messages/" + this.chatService.currentChannel, {}, JSON.stringify(this.messageToSend));
+  }
+
+  getName(){
+    return localStorage.getItem('name');
   }
 
 }
