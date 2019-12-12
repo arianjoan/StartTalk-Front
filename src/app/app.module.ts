@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon'; */
 
 import {DemoMaterialModule} from '../material-module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToolbarComponent } from './components/layout/toolbar/toolbar.component';
 
 
 
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     ChannelComponent,
-    ChatComponent
+    ChatComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

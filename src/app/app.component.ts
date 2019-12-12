@@ -10,9 +10,11 @@ import { ChannelComponent } from './components/channel/channel.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
   ngOnInit(): void {
     localStorage.removeItem('name');
   }
+
 
 }
 
