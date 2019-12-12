@@ -2,6 +2,7 @@
     background-color: rgb(82, 170, 70);
     padding: 10px;
     margin: 0px;
+    cursor: grab;
 }
 
 .noSelected{

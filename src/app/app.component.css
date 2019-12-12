@@ -8,15 +8,15 @@
     height: 10%;
   }
 
-  mat-drawer {
-    width: 20vw;
-    margin: 0%;
-  }
-  
-  mat-drawer-content {
+  mat-sidenav-content{
     width: 80vw;
     margin: 0%;
     padding: 15px;
+  }
+
+  mat-sidenav{
+    width: 20vw;
+    margin: 0%;
   }
 
   .toolbarColor{

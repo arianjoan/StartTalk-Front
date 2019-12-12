@@ -1,16 +1,29 @@
-<mat-toolbar  class="toolbarColor">
-    <button mat-icon-button (click)="drawer.toggle()">
+<mat-toolbar class="toolbarColor">
+    <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
     <h1>StartTalk</h1>
 </mat-toolbar>
 
 
-<mat-drawer-container class="example-container">
-    <mat-drawer #drawer mode=side class="aside">
-        <app-channel></app-channel>
-    </mat-drawer>
-    <mat-drawer-content>
-        <app-chat class="content"></app-chat>
-    </mat-drawer-content>
-</mat-drawer-container>
+<mat-sidenav-container>
+
+    <mat-sidenav #sidenav mode="side" class="aside">
+
+        <mat-toolbar class="toolbarColor">
+            <mat-toolbar-row>
+                <h2> Canales </h2>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <app-channel></app-channel>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-chat></app-chat>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
