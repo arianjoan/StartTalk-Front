@@ -1,17 +1,21 @@
-.example-container {
+.content {
     width: 100%;
-    height: 90%;
+    height: 87vh;
   }
 
   .header {
     width: 100%;
-    height: 10%;
+    height: 8vh;
+  }
+
+  .footer{
+    width: 100%;
+    height: 5vh;
   }
 
   mat-sidenav-content{
     width: 80vw;
     margin: 0%;
-    padding: 15px;
   }
 
   mat-sidenav{
@@ -20,7 +24,7 @@
   }
 
   .toolbarColor{
-    background-color: green;
+    background-color: rgb(53, 163, 53);
     color: white;
   }
 

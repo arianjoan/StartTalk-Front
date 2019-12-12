@@ -1,23 +1,43 @@
-<app-toolbar (toggle)="sidenav.toggle()"></app-toolbar>
+<div class="header">
+    <app-toolbar (toggle)="sidenav.toggle()"></app-toolbar>
+</div>
 
-<mat-sidenav-container>
+<div class="content">
+    <mat-sidenav-container class="content">
 
-    <mat-sidenav #sidenav mode="side" class="aside">
+        <mat-sidenav #sidenav mode="side" class="aside">
 
-        <mat-toolbar class="toolbarColor">
-            <mat-toolbar-row>
-                <h2> Canales </h2>
-            </mat-toolbar-row>
-        </mat-toolbar>
+            <mat-toolbar class="toolbarColor">
+                <mat-toolbar-row>
+                    <h2> Canales </h2>
+                </mat-toolbar-row>
+            </mat-toolbar>
 
-        <mat-nav-list>
-            <app-channel></app-channel>
-        </mat-nav-list>
+            <mat-nav-list>
+                <app-channel></app-channel>
+            </mat-nav-list>
 
-    </mat-sidenav>
+        </mat-sidenav>
 
-    <mat-sidenav-content>
-        <app-chat></app-chat>
-    </mat-sidenav-content>
+        <mat-sidenav-content style="height: 100%;">
 
-</mat-sidenav-container>
+            <mat-toolbar class="toolbarColor" style='height: 10%;'>
+                <mat-toolbar-row style="height: 100%;">
+                    <h2 class="text-center"> Nombre canal</h2>
+                </mat-toolbar-row>
+            </mat-toolbar>
+
+            <div style='height: 90%;'>
+                 <app-chat ></app-chat>
+            </div>
+            
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>
+
+<div class="footer">
+    <div style="height: 100%;">
+            <p class="text-center" style="margin: 0px;">footer StartTalk 2020</p>
+    </div>
+</div>

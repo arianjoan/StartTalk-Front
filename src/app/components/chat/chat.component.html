@@ -1,14 +1,16 @@
-<div class="height">
-    <form [formGroup]='formMessageGroup' *ngIf='this.serviceChannel.getCurrentChannel() != undefined' class="centerChat backgroundGrey">
+<div style='height: 100%;'>
+    <form [formGroup]='formMessageGroup' *ngIf='this.serviceChannel.getCurrentChannel() != undefined'
+        class="centerChat backgroundGrey height">
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="text-center">{{this.serviceChannel.getCurrentChannel().name}}</h1>
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-sm-12">
-                <p *ngFor='let msg of messages'
-                    [className]="msg.from == getName('name') ? 'text-right' : 'text-left'">
+                <p *ngFor='let msg of messages' [className]="msg.from == getName('name') ? 'text-right' : 'text-left'">
                     {{msg.from}}: {{msg.body}} <br>
                 </p>
             </div>
@@ -23,11 +25,8 @@
         </div>
     </form>
 
-    <div *ngIf='this.serviceChannel.getCurrentChannel() == undefined'>
-        <div>
-             <img class="img-responsive background"  src="../../../assets/StartTalk.jpg">
-        </div>
-        
+    <div *ngIf='this.serviceChannel.getCurrentChannel() == undefined' style='height: 100%;'> 
+            <img class="img-responsive" src="../../../assets/StartTalk.jpg" style='height: 100%;'>
     </div>
 
 </div>

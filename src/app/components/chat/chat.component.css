@@ -1,10 +1,5 @@
 .height{
-    height: 85vh;
-}
-
-.background{
-    height: 85vh;
-    width: 60vh;
+    height: fit-content;
 }
 
 .backgroundGrey{
@@ -15,3 +10,8 @@
     padding-right: 35px;
     padding-left: 35px;
 }
+
+.toolbarColor{
+    background-color: rgb(53, 163, 53);
+    color: white;
+  }
