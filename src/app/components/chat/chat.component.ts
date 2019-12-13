@@ -77,10 +77,10 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(){
-    console.log(this.formMessageGroup.value);
     this.messageToSend = this.formMessageGroup.value;
     this.messageToSend.from = localStorage.getItem('name');
     this.stompClient.send("/app/messages/" + this.chatService.currentChannel, {}, JSON.stringify(this.messageToSend));
+    this.formMessageGroup.get('body').setValue("");
   }
 
   getName(){
