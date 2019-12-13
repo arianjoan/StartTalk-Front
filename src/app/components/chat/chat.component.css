@@ -1,5 +1,5 @@
 .height{
-    height: fit-content;
+    height: 100%;
 }
 
 .backgroundGrey{
@@ -7,6 +7,10 @@
 }
 
 .centerChat{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     padding-right: 35px;
     padding-left: 35px;
 }
@@ -15,3 +19,18 @@
     background-color: rgb(53, 163, 53);
     color: white;
   }
+
+  .chat{
+      overflow-y: scroll;
+      height: 90%;
+      margin: 35px 0;
+  }
+
+  .chat::-webkit-scrollbar {
+      width: 7px;
+  }
+
+  .chat::-webkit-scrollbar-thumb{
+      background: green;
+  }
+  

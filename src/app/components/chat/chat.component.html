@@ -1,14 +1,14 @@
-<div style='height: 100%;'>
+<div class="height">
     <form [formGroup]='formMessageGroup' *ngIf='this.serviceChannel.getCurrentChannel() != undefined'
         class="centerChat backgroundGrey height">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="text-center">{{this.serviceChannel.getCurrentChannel().name}}</h1>
+                <h1 class="text-center mb-0">{{this.serviceChannel.getCurrentChannel().name}}</h1>
             </div>
         </div>
 
 
-        <div class="row">
+        <div class="row chat">
             <div class="col-sm-12">
                 <p *ngFor='let msg of messages' [className]="msg.from == getName('name') ? 'text-right' : 'text-left'">
                     {{msg.from}}: {{msg.body}} <br>
