@@ -8,7 +8,7 @@
         </div>
 
 
-        <div class="row chat">
+        <div #chat class="row chat">
             <div class="col-sm-12">
                 <p *ngFor='let msg of messages' [className]="msg.from == getName('name') ? 'text-right' : 'text-left'">
                     {{msg.from}}: {{msg.body}} <br>

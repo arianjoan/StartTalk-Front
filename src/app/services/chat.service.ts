@@ -55,7 +55,6 @@ export class ChatService {
   }
 
   onMessageReceived(message : Message){
-    console.log('mensajeee' + message);
     this.messages.push(message);
     this.messages$.next(this.messages);
   }

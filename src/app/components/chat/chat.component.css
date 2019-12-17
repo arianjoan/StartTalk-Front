@@ -23,7 +23,8 @@
   .chat{
       overflow-y: scroll;
       height: 90%;
-      margin: 35px 0;
+      margin: 35px;
+      width: 70%;
   }
 
   .chat::-webkit-scrollbar {
